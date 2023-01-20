@@ -4,26 +4,36 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/cfe75fd61e.js" crossorigin="anonymous"></script>
     <title>Odin Todo</title>
 </head>
 <body>
     <div class="header">
         <h1>TODO</h1>
-        <button class="new-task-button">New Task</button>
+        <button class="new-task-button"><i class="fa-solid fa-plus"></i>New Task</button>
     </div>
-    <div class="nav">
-        <ul>
-            <li class="selected"><h3>Today</h3></li>
-            <li><h3>Dailies</h3></li>
-            <li>
-                <h3>Projects</h3>
-                <ul class="project-list">
-                    <li class="project">project1</li>
-                </ul>
-                <button class="new-project-button">+</button>
-            </li>
-        </ul>
+    <div class="grid-container">
+        <div class="sidebar">
+            <ul>
+                <li>
+                    <h3 class="today-heading"><i class="fa-solid fa-caret-right"></i>Today</h3>
+                </li>
+                <div class="border"></div>
+                <li>
+                    <h3 class="dailies-heading"><i class="fa-solid fa-calendar-days"></i>Dailies</h3>
+                </li>
+                <div class="border"></div>
+                <li>
+                    <h3 class="project-heading"><i class="fa-solid fa-folder-open"></i></i>Projects</h3>
+                    <ul class="project-list">
+                        <button class="new-project-button" data-tooltip="Add a new project" data-flow="left">+</button>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="content">
+        
+        </div>
     </div>
-    <div class="content"></div>
 </body>
 </html>

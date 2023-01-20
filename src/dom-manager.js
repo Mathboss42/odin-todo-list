@@ -1,0 +1,1 @@
+const projectTemplate = `<li class="project"><i class="fa-solid fa-file"></i>${text}</li>`
