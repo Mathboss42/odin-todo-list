@@ -4,8 +4,12 @@ import { Project } from "./project";
 let tasks = [];
 let projects = [];
 
-export function getTasks(id) {
-    return tasks;
+export function getTasks(projectID = '') {
+    if (!(projectID === '')) {
+        return tasks.filter(task => task.projectID === projectID);
+    } else {
+        return tasks;
+    }
 };
 
 export function addTask(title, description, dueDate, priority, notes, checklist, projectID) {

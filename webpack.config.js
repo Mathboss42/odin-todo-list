@@ -9,6 +9,8 @@ module.exports = {
     devtool: 'inline-source-map',
     devServer: {
         static: './dist',
+        hot: false,
+        liveReload: true
     },
     plugins: [
         new HtmlWebpackPlugin({
