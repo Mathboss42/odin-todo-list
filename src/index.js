@@ -1,3 +1,2 @@
-// import header from './header.html'
-
-// document.body.innerHTML = header;
+import * as taskManager from './task-manager';
+import * as domManager from './dom-manager';
