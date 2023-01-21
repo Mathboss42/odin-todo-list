@@ -23,13 +23,13 @@ export function getTasks(projectID = '') {
     }
 };
 
-export function addTask(title, description, dueDate, priority, notes, checklist, projectID) {
-    const newTask = new Task(title, description, dueDate, priority, notes, checklist, projectID);
+export function addTask(values) {
+    const newTask = new Task(values[0], values[1], values[2], values[3], values[4], values[5]);
     tasks.push(newTask);
 };
 
-export function addProject(title, description, projectID) {
-    const newProject = new Project(title, description, projectID);
+export function addProject(values) {
+    const newProject = new Project(values[0], values[1], values[2]);
     projects.push(newProject);
 }
 

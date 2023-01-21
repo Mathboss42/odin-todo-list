@@ -24,7 +24,7 @@ export function displayProjectCreator() {
     closeButton.addEventListener('click', closeCreator);
 }
 
-function closeCreator() {
+export function closeCreator() {
     const creator = document.querySelectorAll('.creator');
     creator.forEach(el => el.classList.add('hidden'));
     
