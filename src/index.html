@@ -8,32 +8,94 @@
     <title>Odin Todo</title>
 </head>
 <body>
-    <div class="header">
-        <h1>TODO</h1>
-        <button class="new-task-button"><i class="fa-solid fa-plus"></i>New Task</button>
-    </div>
-    <div class="grid-container">
-        <div class="sidebar">
-            <ul>
-                <li>
-                    <h3 class="today-heading"><i class="fa-solid fa-caret-right"></i>Today</h3>
-                </li>
-                <div class="border"></div>
-                <li>
-                    <h3 class="dailies-heading"><i class="fa-solid fa-calendar-days"></i>Dailies</h3>
-                </li>
-                <div class="border"></div>
-                <li>
-                    <h3 class="project-heading"><i class="fa-solid fa-folder-open"></i></i>Projects</h3>
-                    <ul class="project-list">
-                        <button class="new-project-button" data-tooltip="Add a new project" data-flow="left">+</button>
-                    </ul>
-                </li>
-            </ul>
+    <div class="main-container">
+        <div class="header">
+            <h1>TODO</h1>
+            <button class="new-task-button"><i class="fa-solid fa-plus"></i>New Task</button>
         </div>
-        <div class="content">
+        <div class="grid-container">
+            <div class="sidebar">
+                <ul>
+                    <li>
+                        <h3 class="today-heading"><i class="fa-solid fa-caret-right"></i>Today</h3>
+                    </li>
+                    <div class="border"></div>
+                    <li>
+                        <h3 class="dailies-heading"><i class="fa-solid fa-calendar-days"></i>Dailies</h3>
+                    </li>
+                    <div class="border"></div>
+                    <li>
+                        <h3 class="project-heading"><i class="fa-solid fa-folder-open"></i></i>Projects</h3>
+                        <ul class="project-list">
+                            <button class="new-project-button" data-tooltip="Add a new project" data-flow="left">+</button>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="content">
         
+            </div>
         </div>
     </div>
+    <div class="task-creator-container creator hidden blur">
+        <div class="form-container">
+            <div class="close-button-container">
+                <button class="new-task-close-button"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <form action="" class="new-task-form">
+                <div class="title">
+                    <label for="title">Title</label>
+                    <input type="text" name="title" id="title" minlength=1>
+                </div>
+                <div class="desc">
+                    <label for="desc">Description (optional)</label>
+                    <textarea name="desc" id="desc" cols="30" rows="5"></textarea>
+                </div>
+                <div class="dueDate">
+                    <label for="dueDate">Due Date (optional)</label>
+                    <input type="date" name="dueDate" id="dueDate">
+                </div>
+                <div class="priority">
+                    <label for="priority">Priority (optional, default: 1)</label>
+                    <select name="priority" id="priority">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                </div>
+                <div class="notes">
+                    <label for="notes">Notes (optional)</label>
+                    <textarea name="notes" id="notes" cols="30" rows="5"></textarea>
+                </div>
+                <div class="project-selection">
+                    <label for="project">Add to project:</label>
+                    <select name="project" id="project"></select>
+                </div>
+                <input type="submit" value="Add Task">
+            </form>
+        </div>
+    </div>
+    <div class="project-creator-container creator hidden blur">
+        <div class="form-container">
+            <div class="close-button-container">
+                <button class="new-project-close-button"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <form action="" class="new-project-form">
+                <div class="title">
+                    <label for="title">Title</label>
+                    <input type="text" name="title" id="title" minlength=1>
+                </div>
+                <div class="desc">
+                    <label for="desc">Description (optional)</label>
+                    <textarea name="desc" id="desc" cols="30" rows="5"></textarea>
+                </div>
+                <div class="notes">
+                    <label for="notes">Notes (optional)</label>
+                    <textarea name="notes" id="notes" cols="30" rows="5"></textarea>
+                </div>
+                <input type="submit" value="Add Project">
+            </form>
+        </div>
+    </div>    
 </body>
 </html>
