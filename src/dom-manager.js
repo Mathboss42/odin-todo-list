@@ -1,7 +1,3 @@
-import projectCreatorTemplate from './task-creator-template.html';
-
-// const projectTemplate = `<li class="project"><i class="fa-solid fa-file"></i>${text}</li>`
-
 export function displayTaskCreator(projects) {
     const select = document.querySelector('.project-selection select');
     const container = document.querySelector('.task-creator-container');
@@ -35,4 +31,23 @@ export function closeCreator() {
     const addProjectForm = document.querySelector('.new-project-form');
     addTaskForm.reset();
     addProjectForm.reset();
+}
+
+export function updateProjectList(projects) {
+    const projectList = document.querySelector('.project-list')
+    const newProjectButton = document.querySelector('.new-project-button');
+
+    projectList.innerHTML = '';
+
+    for (let i = 0; i < projects.length; i++) {
+        const listItem = document.createElement('li');
+        listItem.classList.add('project');
+        const icon = document.createElement('i');
+        icon.classList.add('fa-solid');
+        icon.classList.add('fa-file');
+        listItem.appendChild(icon);
+        listItem.innerHTML += projects[i].title;
+
+        projectList.appendChild(listItem);
+    }
 }

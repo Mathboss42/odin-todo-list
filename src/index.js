@@ -10,10 +10,10 @@ newTaskButton.addEventListener('click', openTaskCreator);
 newProjectButton.addEventListener('click', openProjectCreator);
 addTaskForm.addEventListener('submit', newTask);
 addProjectForm.addEventListener('submit', newProject);
+const projects = taskManager.getProjects();
 
 function openTaskCreator() {
     console.log('open task creator')
-    const projects = taskManager.getProjects();
     console.log(projects);
     domManager.displayTaskCreator(projects);
 }
@@ -44,6 +44,7 @@ export function newProject(e) {
     }
     taskManager.addProject(values);
     domManager.closeCreator();
+    domManager.updateProjectList(projects);
     console.log(taskManager.getProjects());
 }
 

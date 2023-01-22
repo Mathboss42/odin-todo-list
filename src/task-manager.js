@@ -2,14 +2,7 @@ import { Task } from "./task";
 import { Project } from "./project";
 
 let tasks = [];
-let projects = [
-    {
-        title: 'Dailies',
-        desc: 'Tasks that should be done everyday.',
-        notes: '',
-        projectID: 'dailies',
-    }
-];
+let projects = [];
 
 export function getTasks(projectID = '') {
     if (!(projectID === '')) {
@@ -33,3 +26,16 @@ export function addProject(values) {
 export function getProjects() {
     return projects;
 }
+
+
+
+
+
+
+
+// {
+//     title: 'Dailies',
+//     desc: 'Tasks that should be done everyday.',
+//     notes: '',
+//     projectID: 'dailies',
+// }
