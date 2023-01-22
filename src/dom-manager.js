@@ -4,6 +4,11 @@ export function displayTaskCreator(projects) {
     const closeButton = document.querySelector('.new-task-close-button');
     container.classList.remove('hidden');
     closeButton.addEventListener('click', closeCreator);
+
+    const dailiesOption = document.createElement('option');
+    dailiesOption.setAttribute('value', 'dailies');
+    dailiesOption.innerHTML = 'Dailies';
+    select.appendChild(dailiesOption);
     
     for (let i = 0; i < projects.length; i++) {
         const option = document.createElement('option');
