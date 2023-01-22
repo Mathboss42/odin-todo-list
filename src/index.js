@@ -42,9 +42,14 @@ export function newProject(e) {
     for (const [name, value] of data) {
         values.push(value);
     }
-    taskManager.addProject(values);
-    domManager.closeCreator();
-    domManager.updateProjectList(projects);
-    console.log(taskManager.getProjects());
+
+    if(!(taskManager.checkForProjectDuplicates(values[0]))) {
+        taskManager.addProject(values);
+        domManager.closeCreator();
+        domManager.updateProjectList(projects);
+        console.log(taskManager.getProjects());
+    } else {
+        alert('Project already exists, please choose a different title.');
+    }
 }
 

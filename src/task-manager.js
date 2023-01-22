@@ -27,7 +27,15 @@ export function getProjects() {
     return projects;
 }
 
+export function checkForProjectDuplicates(projectTitle) {    
+    for (let i = 0; i < projects.length; i++) {
+        if (projectTitle === projects[i].title) {
+            return true;
+        }
+    }
 
+    return false;
+}
 
 
 
