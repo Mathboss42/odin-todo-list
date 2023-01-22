@@ -12,7 +12,7 @@ export function displayTaskCreator(projects) {
     for (let i = 0; i < projects.length; i++) {
         const option = document.createElement('option');
         option.setAttribute('value', projects[i].projectID);
-        option.innerHTML = projects[i].name;
+        option.innerHTML = projects[i].title;
         select.appendChild(option);
     }
 }
@@ -30,4 +30,9 @@ export function closeCreator() {
     
     const select = document.querySelector('.project-selection select');
     select.innerHTML = '';
+
+    const addTaskForm = document.querySelector('.new-task-form');
+    const addProjectForm = document.querySelector('.new-project-form');
+    addTaskForm.reset();
+    addProjectForm.reset();
 }

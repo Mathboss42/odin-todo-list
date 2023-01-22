@@ -14,6 +14,7 @@ addProjectForm.addEventListener('submit', newProject);
 function openTaskCreator() {
     console.log('open task creator')
     const projects = taskManager.getProjects();
+    console.log(projects);
     domManager.displayTaskCreator(projects);
 }
 
@@ -30,14 +31,19 @@ export function newTask(e) {
     }
     taskManager.addTask(values);
     domManager.closeCreator();
-    addTaskForm.reset();
     console.log(taskManager.getTasks());
 }
 
 
 export function newProject(e) {
     e.preventDefault();
-    taskManager.addProject(e);
+    const data = new FormData(addProjectForm);
+    let values = [];
+    for (const [name, value] of data) {
+        values.push(value);
+    }
+    taskManager.addProject(values);
     domManager.closeCreator();
+    console.log(taskManager.getProjects());
 }
 

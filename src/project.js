@@ -1,7 +1,8 @@
 export class Project {
-    constructor(title, description = '', projectID) {
+    constructor(title, description = '', notes) {
         this.title = title;
         this.description = description;
-        this.projectID = projectID;
+        this.notes = notes;
+        this.projectID = title.toLowerCase();
     }
 }

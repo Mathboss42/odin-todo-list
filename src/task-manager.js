@@ -4,15 +4,11 @@ import { Project } from "./project";
 let tasks = [];
 let projects = [
     {
-        name: 'project 1',
-        desc: 'cool project',
-        projectID: 'project001'
-    },
-    {
-        name: 'project 2',
-        desc: 'uncool project',
-        projectID: 'project002'
-    },
+        title: 'Dailies',
+        desc: 'Tasks that should be done everyday.',
+        notes: '',
+        projectID: 'dailies',
+    }
 ];
 
 export function getTasks(projectID = '') {
@@ -31,6 +27,7 @@ export function addTask(values) {
 export function addProject(values) {
     const newProject = new Project(values[0], values[1], values[2]);
     projects.push(newProject);
+    console.log(getProjects);
 }
 
 export function getProjects() {
