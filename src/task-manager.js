@@ -117,6 +117,23 @@ export function getCurrentProject() {
     return currentProjectID;
 }
 
+export function setDone(task) {
+    const newTask = getTask(task);
+    console.log(newTask);
+    newTask[0].isDone = true;
+    console.log(getTasks());
+}
+
+export function setUndone(task) {
+    const newTask = getTask(task);
+    console.log(newTask);
+    newTask[0].isDone = false;
+    console.log(getTasks());
+}
+
+function getTask(title) {
+    return tasks.filter(task => task.title === title);
+}
 
 // {
 //     title: 'Dailies',

@@ -68,7 +68,7 @@ export function updateProjectList(projects, callback) {
     }
 }
 
-export function updateTaskList(taskList) {
+export function updateTaskList(taskList, callback) {
     console.log('updateTaskList');
 
     const todoList = document.querySelector('#todo-list');
@@ -76,7 +76,7 @@ export function updateTaskList(taskList) {
 
     for (let i = 0; i < taskList.length; i++) {
         const currentTask = taskList[i];
-        const newTaskItem = createTaskItem(currentTask);
+        const newTaskItem = createTaskItem(currentTask, callback);
         todoList.appendChild(newTaskItem);
         if (taskList[i].isDone) {
             newTaskItem.querySelector('input').setAttribute('checked', '');
@@ -84,7 +84,7 @@ export function updateTaskList(taskList) {
     }
 }
 
-function createTaskItem(task) {
+function createTaskItem(task, callback) {
     const container = document.createElement('div');
     container.classList.add('task');
     container.setAttribute('data-priority', task.priority);
@@ -101,6 +101,9 @@ function createTaskItem(task) {
     
     container.querySelector('.project-ref').innerHTML += task.projectID;
     container.querySelector('.priority').innerHTML += task.priority;
+    container.querySelector('input').id = task.title;
+    
+    container.querySelector('input').addEventListener('change', callback);
 
     return container;
 }
