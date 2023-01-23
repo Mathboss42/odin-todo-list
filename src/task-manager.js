@@ -5,7 +5,7 @@ let tasks = [
     {
         title: 'asdd',
         description: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Commodi, deleniti.',
-        dueDate: undefined,
+        dueDate: '2024-12-44',
         priority: 1,
         notes: 'a bit of notes',
         projectID: 'dailies'
@@ -52,6 +52,8 @@ let projects = [
     },
 ];
 
+let currentProject = {};
+
 export function getTasks(projectID = '') {
     if (!(projectID === '')) {
         return tasks.filter(task => task.projectID === projectID);
@@ -85,8 +87,13 @@ export function checkForProjectDuplicates(projectTitle) {
     return false;
 }
 
+export function setCurrentProject(newProject) {
+    currentProject = newProject;
+}
 
-
+export function getCurrentProject() {
+    return currentProject;
+}
 
 
 // {

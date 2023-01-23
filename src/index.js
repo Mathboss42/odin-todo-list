@@ -1,8 +1,7 @@
+import { format } from 'date-fns';
 import './styles.css';
 import * as taskManager from './task-manager';
 import * as domManager from './dom-manager';
-
-
 
 const newTaskButton = document.querySelector('.new-task-button');
 newTaskButton.addEventListener('click', openTaskCreator);
@@ -39,12 +38,15 @@ function openProjectCreator(){
     domManager.displayProjectCreator();
 }
 
-export function newTask(e) {
+function newTask(e) {
     e.preventDefault();
     const data = new FormData(addTaskForm);
     let values = [];
     for (const [name, value] of data) {
         values.push(value);
+    }
+    if (values[2] !== '') {
+        values[2] = format(new Date(values[2]), 'MM/dd/yyyy');
     }
     taskManager.addTask(values);
     domManager.closeCreator();
@@ -52,7 +54,7 @@ export function newTask(e) {
 }
 
 
-export function newProject(e) {
+function newProject(e) {
     e.preventDefault();
     const data = new FormData(addProjectForm);
     let values = [];

@@ -63,6 +63,7 @@ html, body {
 }
 
 .header {
+    min-height: 134px;
     display: grid;
     grid-template-columns: 1fr 5fr;
     justify-items: center;
@@ -275,10 +276,6 @@ html, body {
     margin-right: 12px;
 }
 
-h4 {
-    font-family: 'Roboto-Bold', sans-serif;
-}
-
 .delete-button > i {
     margin: 0;
 }
@@ -297,13 +294,21 @@ h4 {
     background-color: var(--color-four);
 }
 
+h4 {
+    font-family: 'Roboto-Bold', sans-serif;
+}
 
 select, input, textarea, option {
+    font-size: medium;
     color: black;
 }
 
 textarea {
     resize: none;
+}
+
+label {
+    font-size: larger;
 }
 
 li.selected {

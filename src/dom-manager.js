@@ -80,8 +80,11 @@ function createTaskItem(task) {
     container.setAttribute('data-priority', task.priority);
     container.innerHTML = taskTemplate;
 
+    if (task.dueDate != null) {
+        container.querySelector('.date').innerHTML = `Due Date: ${task.dueDate}`;
+    }
+
     container.querySelector('h4').innerHTML = task.title;
-    container.querySelector('.date').innerHTML = task.date;
     container.querySelector('.task-desc').innerHTML = task.description;
     container.querySelector('.notes').innerHTML = task.notes;
     
