@@ -233,20 +233,21 @@ html, body {
     border-bottom: 1px solid rgb(69, 79, 85);
 }
 
-.todo-list {
+#todo-list {
     margin-top: 32px;
     width: 60%;
 }
 
 .task {
     padding: 32px;
+    margin-bottom: 32px;
     width: 100%;
     background-color: var(--color-three);
     /* box-shadow: 5px 5px 5px 0px rgba(112, 66, 46, 0.75); */
     box-shadow: 5px 5px 5px 0px rgba(92, 99, 100, 0.75);
 }
 
-.task-desc {
+.task p {
     margin-bottom: 16px;
 }
 
@@ -259,8 +260,13 @@ html, body {
     border-bottom: 1px solid rgb(69, 79, 85);
 }
 
+.task-header > .date {
+    margin-right: 16px;
+}
+
 .task-heading {
     display: flex;
+    margin-right: 16px;
 }
 
 .task-heading > input {

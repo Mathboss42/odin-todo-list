@@ -1,8 +1,56 @@
 import { Task } from "./task";
 import { Project } from "./project";
 
-let tasks = [];
-let projects = [];
+let tasks = [
+    {
+        title: 'asdd',
+        description: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Commodi, deleniti.',
+        dueDate: undefined,
+        priority: 1,
+        notes: 'a bit of notes',
+        projectID: 'dailies'
+    },
+    {
+        title: 'qw',
+        description: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Commodi, deleniti.',
+        dueDate: undefined,
+        priority: 3,
+        notes: 'a bit of notes',
+        projectID: 'dailies'
+    },
+    {
+        title: 'qweqweqweqweqweqweqwe',
+        description: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Commodi, deleniti.',
+        dueDate: undefined,
+        priority: 2,
+        notes: 'a bit of notes for fun',
+        projectID: 'dailies'
+    },
+    {
+        title: 'AGAEG',
+        description: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Commodi, deleniti.',
+        dueDate: undefined,
+        priority: 2,
+        notes: '',
+        projectID: 'asdaweawd'
+    },
+    {
+        title: 'AEHERHERHH',
+        description: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Commodi, deleniti.',
+        dueDate: undefined,
+        priority: 1,
+        notes: 'a bit of notes because why not',
+        projectID: 'asdaweawd'
+    },
+];
+let projects = [
+    {
+        title: 'asdaweawd',
+        description: '',
+        notes: '',
+        projectID: 'asdaweawd'
+    },
+];
 
 export function getTasks(projectID = '') {
     if (!(projectID === '')) {
