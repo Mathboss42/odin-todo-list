@@ -80,18 +80,31 @@ html, body {
     border-right: 4px solid var(--color-two);
 }
 
+.project-list {
+    display: flex;
+    flex-direction: column;
+}
+
 .project {
-    max-width: 100%;
+    padding: 6px;
+    display: grid;
+    grid-template-columns: 1fr 5fr;
     font-size: 20px;
     margin-left: 30px;
+    word-break: break-all;
     overflow-wrap: break-word;
     margin-bottom: 16px;
     cursor: pointer;
 }
 
-.project-list {
-    display: flex;
-    flex-direction: column;
+.project i {
+    transform: translate(-10%, 10%);
+    margin-right: 6px;
+}
+
+h5 {
+    width: 100%;
+    font-size: 18px;
 }
 
 .close-button-container {
@@ -115,6 +128,7 @@ html, body {
     background-color: var(--color-two);
     margin-left: auto;
     margin-right: 0;
+    margin-bottom: 32px;
 }
 
 .new-project-button:hover {
@@ -216,6 +230,8 @@ html, body {
 }
 
 .project-board {
+    position: relative;
+    border-radius: 8px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -246,6 +262,7 @@ html, body {
     background-color: var(--color-three);
     /* box-shadow: 5px 5px 5px 0px rgba(112, 66, 46, 0.75); */
     box-shadow: 5px 5px 5px 0px rgba(92, 99, 100, 0.75);
+    border-radius: 8px;
 }
 
 .task p {
@@ -259,6 +276,7 @@ html, body {
     margin-bottom: 24px;
     font-size: larger;
     border-bottom: 1px solid rgb(69, 79, 85);
+    max-width: 100%;
 }
 
 .task-header > .date {
@@ -271,12 +289,12 @@ html, body {
 }
 
 .task-heading > input {
-    width: 24px;
-    height: 24px;
+    min-width: 24px;
+    min-height: 24px;
     margin-right: 12px;
 }
 
-.delete-button > i {
+.delete-button > i, .fa-file {
     margin: 0;
 }
 
@@ -294,6 +312,18 @@ html, body {
     background-color: var(--color-four);
 }
 
+.project-board .delete-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-right: 8px;
+    margin-top: 8px;
+}
+
+.priority {
+    text-align: end;
+}
+
 h4 {
     font-family: 'Roboto-Bold', sans-serif;
 }
@@ -301,6 +331,13 @@ h4 {
 select, input, textarea, option {
     font-size: medium;
     color: black;
+    padding: 4px ;
+}
+
+input[type=submit] {
+    margin-left: 50%;
+    margin-right: 50%;
+    transform: translate(-50%, 0);
 }
 
 textarea {
@@ -311,7 +348,7 @@ label {
     font-size: larger;
 }
 
-li.selected {
+.selected {
     background-color: var(--color-six);
     border-radius: 4px;
 }

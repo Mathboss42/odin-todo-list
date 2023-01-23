@@ -1,4 +1,6 @@
+import { format } from 'date-fns';
 import taskTemplate from './task-template.html';
+import * as descriptions from './descriptions';
 
 export function displayTaskCreator(projects) {
     const select = document.querySelector('.project-selection select');
@@ -42,7 +44,6 @@ export function closeCreator() {
 
 export function updateProjectList(projects, callback) {
     const projectList = document.querySelector('.project-list')
-    const newProjectButton = document.querySelector('.new-project-button');
 
     projectList.innerHTML = '';
 
@@ -50,13 +51,19 @@ export function updateProjectList(projects, callback) {
         const listItem = document.createElement('li');
         listItem.classList.add('project');
         listItem.setAttribute('data-id', projects[i].projectID);
+        
         const icon = document.createElement('i');
         icon.classList.add('fa-solid');
         icon.classList.add('fa-file');
         listItem.appendChild(icon);
-        listItem.innerHTML += projects[i].title;
-        listItem.addEventListener('click', callback);
-
+        
+        const heading = document.createElement('h5');
+        heading.innerHTML += projects[i].title;
+        listItem.appendChild(heading);
+        
+        heading.addEventListener('click', callback);
+        icon.addEventListener('click', callback);
+        
         projectList.appendChild(listItem);
     }
 }
@@ -71,6 +78,9 @@ export function updateTaskList(taskList) {
         const currentTask = taskList[i];
         const newTaskItem = createTaskItem(currentTask);
         todoList.appendChild(newTaskItem);
+        if (taskList[i].isDone) {
+            newTaskItem.querySelector('input').setAttribute('checked', '');
+        }
     }
 }
 
@@ -80,15 +90,57 @@ function createTaskItem(task) {
     container.setAttribute('data-priority', task.priority);
     container.innerHTML = taskTemplate;
 
-    if (task.dueDate != null) {
-        container.querySelector('.date').innerHTML = `Due Date: ${task.dueDate}`;
+    if (task.dueDate !== null && task.dueDate !== '' && task.dueDate !== undefined) {
+        console.log(task.dueDate);
+        container.querySelector('.date').innerHTML = `Due Date: ${format(new Date(task.dueDate), 'MM/dd/yyyy')}`;
     }
 
     container.querySelector('h4').innerHTML = task.title;
     container.querySelector('.task-desc').innerHTML = task.description;
     container.querySelector('.notes').innerHTML = task.notes;
     
+    container.querySelector('.project-ref').innerHTML += task.projectID;
     container.querySelector('.priority').innerHTML += task.priority;
 
     return container;
+}
+
+export function toggleSelected(element) {
+    const selected = document.querySelector('.selected');
+    if (selected) {
+        selected.classList.remove('selected');
+    }
+
+    element.classList.add('selected');
+}
+
+export function updateProjectBoard(currentProjectID, callback) {
+    const projectBoard = document.querySelector('.project-board');
+    
+    if (projectBoard.querySelector('.delete-button')) {
+        projectBoard.querySelector('.delete-button').remove();
+    }
+
+    if (currentProjectID === 'today' || currentProjectID === 'dailies' || currentProjectID === 'all' || currentProjectID === 'history') {
+        projectBoard.querySelector('.project-board-heading').innerHTML = capitalizeFirstLetter(currentProjectID);
+        projectBoard.querySelector('.project-description').innerHTML = descriptions[currentProjectID];
+    } else {
+        const deleteButton = document.createElement('button');
+        const icon = document.createElement('i');
+
+        deleteButton.classList.add('delete-button');
+        icon.classList.add('fa-solid');
+        icon.classList.add('fa-trash');
+        projectBoard.appendChild(deleteButton);
+        deleteButton.appendChild(icon);
+
+        deleteButton.addEventListener('click', callback);
+
+        projectBoard.querySelector('.project-board-heading').innerHTML = capitalizeFirstLetter(currentProjectID.title);
+        projectBoard.querySelector('.project-description').innerHTML = currentProjectID.description;
+    }
+}
+
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
 }

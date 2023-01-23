@@ -5,54 +5,71 @@ let tasks = [
     {
         title: 'asdd',
         description: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Commodi, deleniti.',
-        dueDate: '2024-12-44',
+        dueDate: null,
         priority: 1,
         notes: 'a bit of notes',
-        projectID: 'dailies'
+        projectID: 'dailies',
+        isDone: false,
     },
     {
         title: 'qw',
         description: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Commodi, deleniti.',
-        dueDate: undefined,
+        dueDate: null,
         priority: 3,
         notes: 'a bit of notes',
-        projectID: 'dailies'
+        projectID: 'dailies',
+        isDone: false,
     },
     {
-        title: 'qweqweqweqweqweqweqwe',
+        title: 'qweqweqweqweqweqweqw qweqweqweqweqweqwee',
         description: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Commodi, deleniti.',
-        dueDate: undefined,
+        dueDate: '2023-01-23',
         priority: 2,
         notes: 'a bit of notes for fun',
-        projectID: 'dailies'
+        projectID: 'asd',
+        isDone: false,
     },
     {
         title: 'AGAEG',
         description: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Commodi, deleniti.',
-        dueDate: undefined,
+        dueDate: null,
         priority: 2,
         notes: '',
-        projectID: 'asdaweawd'
+        projectID: 'asdaweawd',
+        isDone: false,
     },
     {
         title: 'AEHERHERHH',
         description: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Commodi, deleniti.',
-        dueDate: undefined,
+        dueDate: '2022-01-01',
         priority: 1,
         notes: 'a bit of notes because why not',
-        projectID: 'asdaweawd'
+        projectID: 'asdaweawd',
+        isDone: true,
     },
 ];
 let projects = [
     {
         title: 'asdaweawd',
-        description: '',
+        description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam, voluptatem!',
         notes: '',
         projectID: 'asdaweawd'
     },
+    {
+        title: 'asd',
+        description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam, voluptatem!',
+        notes: '',
+        projectID: 'asd'
+    },
+    {
+        title: 'asdaweawdasdasd',
+        description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam, voluptatem!',
+        notes: '',
+        projectID: 'asdaweawdasdasd'
+    },
 ];
 
-let currentProject = {};
+let currentProjectID = 'today';
 
 export function getTasks(projectID = '') {
     if (!(projectID === '')) {
@@ -65,6 +82,7 @@ export function getTasks(projectID = '') {
 export function addTask(values) {
     const newTask = new Task(values[0], values[1], values[2], values[3], values[4], values[5]);
     tasks.push(newTask);
+    console.log(`task date is ${newTask.dueDate}`)
 };
 
 export function addProject(values) {
@@ -73,8 +91,12 @@ export function addProject(values) {
     console.log(getProjects);
 }
 
-export function getProjects() {
-    return projects;
+export function getProjects(projectID = '') {
+    if (!(projectID === '')) {
+        return projects.filter(project => project.projectID === projectID);
+    } else {
+        return projects;
+    }
 }
 
 export function checkForProjectDuplicates(projectTitle) {    
@@ -87,12 +109,12 @@ export function checkForProjectDuplicates(projectTitle) {
     return false;
 }
 
-export function setCurrentProject(newProject) {
-    currentProject = newProject;
+export function setCurrentProject(id) {
+    currentProjectID = id;
 }
 
 export function getCurrentProject() {
-    return currentProject;
+    return currentProjectID;
 }
 
 
