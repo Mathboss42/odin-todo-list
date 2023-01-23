@@ -12,15 +12,28 @@
 }
 
 :root {
-    --color-one: #53b5c0;
-    --color-two: #0E5E6F; 
-    --color-three: #FFEFD6; 
-    --color-four: #F2DEBA;
+    --color-one: #7eafbe;
+    --color-two: #2b5872; 
+    --color-three: #f7fcff; 
+    --color-four: #e0e6e9;
+    --color-five: rgb(116, 127, 133);
     --color-six: rgba(14, 94, 111, 0.3);
+    --color-seven: rgb(5, 40, 48);
+    --color-task-button-active: #6394a3;
+    --color-task-button-hover: #89c2d8;
+    --color-project-button-active: #234453;
+    --color-project-button-hover: #387992;
+    /* --color-one: #53b5c0;
+    --color-two: #0E5E6F; 
+    --color-three: #fff8ec; 
+    --color-four: #f3e7d2;
+    --color-five: rgb(133, 120, 116);
+    --color-six: rgba(14, 94, 111, 0.3);
+    --color-seven: rgb(5, 40, 48);
     --color-task-button-active: #439ba5;
     --color-task-button-hover: #6acdd8;
     --color-project-button-active: #0a4d5c;
-    --color-project-button-hover: #18788d;
+    --color-project-button-hover: #18788d; */
 }
 
 * {
@@ -29,10 +42,11 @@
     padding: 0;
     box-sizing: border-box;
     color: white;
+    user-select: none;
 }
 
 html, body {
-    background-color: var(--color-three);
+    background-color: var(--color-four);
     height: 100%;
 }
 
@@ -54,6 +68,7 @@ html, body {
     justify-items: center;
     align-items: center;
     background-color: var(--color-two);
+    border-bottom: 4px solid var(--color-seven);
 }
 
 .sidebar {
@@ -61,6 +76,7 @@ html, body {
     background-color: var(--color-one);
     height: 100%;
     min-width: 300px;
+    border-right: 4px solid var(--color-two);
 }
 
 .project {
@@ -179,6 +195,103 @@ html, body {
     visibility: hidden;
 }
 
+.content {
+    padding-top: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.content * {
+    /* color: rgb(85, 73, 69); */
+    color: rgb(69, 79, 85);
+}
+
+.content-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+}
+
+.project-board {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 16px 0;
+    padding: 32px;
+    width: 80%;
+    background-color: var(--color-three);
+    /* box-shadow: 5px 5px 5px 0px rgba(112, 66, 46, 0.75); */
+    box-shadow: 5px 5px 5px 0px rgba(92, 99, 100, 0.75);
+}
+
+.project-description {
+    font-size: 18px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgb(69, 79, 85);
+}
+
+.todo-list {
+    margin-top: 32px;
+    width: 60%;
+}
+
+.task {
+    padding: 32px;
+    width: 100%;
+    background-color: var(--color-three);
+    /* box-shadow: 5px 5px 5px 0px rgba(112, 66, 46, 0.75); */
+    box-shadow: 5px 5px 5px 0px rgba(92, 99, 100, 0.75);
+}
+
+.task-desc {
+    margin-bottom: 16px;
+}
+
+.task-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    font-size: larger;
+    border-bottom: 1px solid rgb(69, 79, 85);
+}
+
+.task-heading {
+    display: flex;
+}
+
+.task-heading > input {
+    width: 24px;
+    height: 24px;
+    margin-right: 12px;
+}
+
+h4 {
+    font-family: 'Roboto-Bold', sans-serif;
+}
+
+.delete-button > i {
+    margin: 0;
+}
+
+.delete-button {
+    background-color: var(--color-three);
+    padding: 8px;
+    cursor: pointer;
+}
+
+.delete-button > i:hover {
+    color: var(--color-five);
+}
+
+.delete-button:active {
+    background-color: var(--color-four);
+}
+
+
 select, input, textarea, option {
     color: black;
 }
@@ -198,6 +311,12 @@ h1 {
     font-size: 48px;
     font-family: 'Roboto-Bold', 'Roboto', sans-serif;
     text-align: center;
+}
+
+h2 {
+    margin-bottom: 32px;
+    font-family: 'Roboto-Bold', 'Roboto', sans-serif;
+    font-size: 40px;
 }
 
 h3 {
