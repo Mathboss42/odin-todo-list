@@ -68,15 +68,13 @@ export function updateProjectList(projects, callback) {
     }
 }
 
-export function updateTaskList(taskList, callback) {
-    console.log('updateTaskList');
-
+export function updateTaskList(taskList, callback, otherCallback) {
     const todoList = document.querySelector('#todo-list');
     todoList.innerHTML = '';
 
     for (let i = 0; i < taskList.length; i++) {
         const currentTask = taskList[i];
-        const newTaskItem = createTaskItem(currentTask, callback);
+        const newTaskItem = createTaskItem(currentTask, callback, otherCallback);
         todoList.appendChild(newTaskItem);
         if (taskList[i].isDone) {
             newTaskItem.querySelector('input').setAttribute('checked', '');
@@ -84,14 +82,13 @@ export function updateTaskList(taskList, callback) {
     }
 }
 
-function createTaskItem(task, callback) {
+function createTaskItem(task, callback, otherCallback) {
     const container = document.createElement('div');
     container.classList.add('task');
     container.setAttribute('data-priority', task.priority);
     container.innerHTML = taskTemplate;
 
     if (task.dueDate !== null && task.dueDate !== '' && task.dueDate !== undefined) {
-        console.log(task.dueDate);
         container.querySelector('.date').innerHTML = `Due Date: ${format(new Date(task.dueDate), 'MM/dd/yyyy')}`;
     }
 
@@ -102,8 +99,10 @@ function createTaskItem(task, callback) {
     container.querySelector('.project-ref').innerHTML += task.projectID;
     container.querySelector('.priority').innerHTML += task.priority;
     container.querySelector('input').id = task.title;
+    container.querySelector('button').id = task.title;
     
     container.querySelector('input').addEventListener('change', callback);
+    container.querySelector('button').addEventListener('click', otherCallback);
 
     return container;
 }
@@ -132,6 +131,7 @@ export function updateProjectBoard(currentProjectID, callback) {
         const icon = document.createElement('i');
 
         deleteButton.classList.add('delete-button');
+        deleteButton.setAttribute('data-id', currentProjectID.title);
         icon.classList.add('fa-solid');
         icon.classList.add('fa-trash');
         projectBoard.appendChild(deleteButton);

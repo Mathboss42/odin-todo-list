@@ -17,13 +17,11 @@ export function getTasks(projectID = '') {
 export function addTask(values) {
     const newTask = new Task(values[0], values[1], values[2], values[3], values[4], values[5]);
     tasks.push(newTask);
-    console.log(`task date is ${newTask.dueDate}`)
 };
 
 export function addProject(values) {
     const newProject = new Project(values[0], values[1], values[2]);
     projects.push(newProject);
-    console.log(getProjects);
 }
 
 export function getProjects(projectID = '') {
@@ -54,16 +52,12 @@ export function getCurrentProject() {
 
 export function setDone(task) {
     const newTask = getTask(task);
-    console.log(newTask);
     newTask[0].isDone = true;
-    console.log(getTasks());
 }
 
 export function setUndone(task) {
     const newTask = getTask(task);
-    console.log(newTask);
     newTask[0].isDone = false;
-    console.log(getTasks());
 }
 
 function getTask(title) {
@@ -78,9 +72,14 @@ export function setProjects(newProject) {
     projects.push(newProject);
 }
 
-// {
-//     title: 'Dailies',
-//     desc: 'Tasks that should be done everyday.',
-//     notes: '',
-//     projectID: 'dailies',
-// }
+export function removeTask(title) {
+    console.log(title);
+    tasks.splice(tasks.findIndex(task => task.title === title), 1);
+    console.log(tasks);
+}
+
+export function removeProject(projectID) {
+    console.log(projectID);
+    projects.splice(projects.findIndex(task => task.projectID === projectID), 1);
+    console.log(projects);
+}

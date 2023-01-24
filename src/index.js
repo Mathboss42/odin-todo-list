@@ -32,8 +32,6 @@ const projects = taskManager.getProjects();
 
 
 function openTaskCreator() {
-    console.log('open task creator')
-    console.log(projects);
     domManager.displayTaskCreator(projects);
 }
 
@@ -52,17 +50,14 @@ function newTask(e) {
     domManager.closeCreator();
 
     if (taskManager.getCurrentProject() === 'all') {
-        domManager.updateTaskList(taskManager.getTasks().sort(comparePriority), checkTask);
+        domManager.updateTaskList(taskManager.getTasks().sort(comparePriority), checkTask, deleteTask);
     } else if (taskManager.getCurrentProject() === 'today') {
-        domManager.updateTaskList(taskManager.getTasks().filter(el => isToday(parseISO(el.dueDate)) || (el.projectID === 'dailies')).sort(comparePriority), checkTask);
+        domManager.updateTaskList(taskManager.getTasks().filter(el => isToday(parseISO(el.dueDate)) || (el.projectID === 'dailies')).sort(comparePriority), checkTask, deleteTask);
     } else {
-        domManager.updateTaskList(taskManager.getTasks(taskManager.getCurrentProject()).sort(comparePriority), checkTask);
+        domManager.updateTaskList(taskManager.getTasks(taskManager.getCurrentProject()).sort(comparePriority), checkTask, deleteTask);
     }
 
-    populateStorage();
-
-    console.log(taskManager.getCurrentProject());
-    console.log(taskManager.getTasks());
+    populateTaskStorage();
 }
 
 
@@ -82,43 +77,41 @@ function newProject(e) {
         alert('Project already exists, please choose a different title.');
     }
 
-    populateStorage();
+    populateProjectStorage();
 }
 
 function displayTaskList(e) {
     if (e.target.id === 'today-heading') {
         let taskList = taskManager.getTasks().filter(el => isToday(parseISO(el.dueDate)) || (el.projectID === 'dailies')).sort(comparePriority);
-        domManager.updateTaskList(taskList, checkTask);
+        domManager.updateTaskList(taskList, checkTask, deleteTask);
         
         taskManager.setCurrentProject('today');
         domManager.updateProjectBoard('today');
         
     } else if (e.target.id === 'dailies-heading') {
         let taskList = taskManager.getTasks().filter(el => el.projectID === 'dailies').sort(comparePriority);
-        domManager.updateTaskList(taskList, checkTask)
+        domManager.updateTaskList(taskList, checkTask, deleteTask)
         
         taskManager.setCurrentProject('dailies');
         domManager.updateProjectBoard('dailies');
         
     } else if (e.target.id === 'all-heading') {
         const taskList = taskManager.getTasks().sort(comparePriority);
-        domManager.updateTaskList(taskList, checkTask);
+        domManager.updateTaskList(taskList, checkTask, deleteTask);
         
         taskManager.setCurrentProject('all');
         domManager.updateProjectBoard('all');
         
     } else if (e.target.id === 'history-heading') {
         let taskList = taskManager.getTasks().filter(el => isBeforeToday(el.dueDate) && (el.isDone === true)).sort(comparePriority);
-        console.log(taskList);
-        domManager.updateTaskList(taskList, checkTask);
+        domManager.updateTaskList(taskList, checkTask, deleteTask);
         
         taskManager.setCurrentProject('history');
         domManager.updateProjectBoard('history');
  
     } else {
-        console.log(e.target.parentNode.dataset.id)
         const taskList = taskManager.getTasks().filter(el => el.projectID === e.target.parentNode.dataset.id).sort(comparePriority);
-        domManager.updateTaskList(taskList, checkTask);
+        domManager.updateTaskList(taskList, checkTask, deleteTask);
 
         taskManager.setCurrentProject(e.target.parentNode.dataset.id);
         const currentProject = taskManager.getProjects(e.target.parentNode.dataset.id);
@@ -138,8 +131,29 @@ function isBeforeToday(date) {
     return isBefore(dateToCompare, today);
 }
 
-function deleteProject() {
-    console.log('delete project please')
+function deleteProject(e) {
+    console.log('delete project please');
+    taskManager.removeProject(e.target.dataset.id);
+    domManager.updateProjectBoard('today');
+    domManager.updateProjectList(projects, displayTaskList);
+    populateProjectStorage()
+}
+
+function deleteTask(e) {
+    console.log('delete TASK please');
+    console.log(e.target);
+    console.log(e.target.id);
+    taskManager.removeTask(e.target.id);
+
+    if (taskManager.getCurrentProject() === 'all') {
+        domManager.updateTaskList(taskManager.getTasks().sort(comparePriority), checkTask, deleteTask);
+    } else if (taskManager.getCurrentProject() === 'today') {
+        domManager.updateTaskList(taskManager.getTasks().filter(el => isToday(parseISO(el.dueDate)) || (el.projectID === 'dailies')).sort(comparePriority), checkTask, deleteTask);
+    } else {
+        domManager.updateTaskList(taskManager.getTasks(taskManager.getCurrentProject()).sort(comparePriority), checkTask, deleteTask);
+    }
+
+    populateTaskStorage();
 }
 
 function checkTask(e) {
@@ -150,15 +164,15 @@ function checkTask(e) {
     }
 }
 
-function populateStorage() {
+function populateTaskStorage() {
     const taskList = JSON.stringify(taskManager.getTasks());
     const newTaskList = taskList.substring(1, taskList.length-1);
-    console.log(newTaskList);
     localStorage.setItem('tasks', newTaskList);
-    
+}
+
+function populateProjectStorage() {
     const projectList = JSON.stringify(taskManager.getProjects());
     const newProjectList = projectList.substring(1, projectList.length-1);
-    console.log(newProjectList);
     localStorage.setItem('projects', newProjectList);
 }
 
@@ -181,16 +195,16 @@ function retrieveProjectsFromStorage() {
 }
 
 if (!localStorage.getItem('tasks')) {
-    populateStorage();
+    populateTaskStorage();
 } else {
     retrieveTasksFromStorage();
 }
 
 if (!localStorage.getItem('projects')) {
-    populateStorage();
+    populateProjectStorage();
 } else {
     retrieveProjectsFromStorage();
 }
 
 domManager.updateProjectList(projects, displayTaskList);
-domManager.updateTaskList(taskManager.getTasks().filter(el => isToday(parseISO(el.dueDate)) || (el.projectID === 'dailies')).sort(comparePriority), checkTask);
+domManager.updateTaskList(taskManager.getTasks().filter(el => isToday(parseISO(el.dueDate)) || (el.projectID === 'dailies')).sort(comparePriority), checkTask, deleteTask);

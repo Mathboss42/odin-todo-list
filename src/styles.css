@@ -298,6 +298,10 @@ h5 {
     margin: 0;
 }
 
+.delete-button > i {
+    pointer-events: none;
+}
+
 .delete-button {
     background-color: var(--color-three);
     padding: 8px;
