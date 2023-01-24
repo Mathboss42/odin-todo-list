@@ -59,6 +59,8 @@ function newTask(e) {
         domManager.updateTaskList(taskManager.getTasks(taskManager.getCurrentProject()).sort(comparePriority), checkTask);
     }
 
+    populateStorage();
+
     console.log(taskManager.getCurrentProject());
     console.log(taskManager.getTasks());
 }
@@ -79,6 +81,8 @@ function newProject(e) {
     } else {
         alert('Project already exists, please choose a different title.');
     }
+
+    populateStorage();
 }
 
 function displayTaskList(e) {
@@ -144,6 +148,48 @@ function checkTask(e) {
     } else {
         taskManager.setUndone(e.target.id);
     }
+}
+
+function populateStorage() {
+    const taskList = JSON.stringify(taskManager.getTasks());
+    const newTaskList = taskList.substring(1, taskList.length-1);
+    console.log(newTaskList);
+    localStorage.setItem('tasks', newTaskList);
+    
+    const projectList = JSON.stringify(taskManager.getProjects());
+    const newProjectList = projectList.substring(1, projectList.length-1);
+    console.log(newProjectList);
+    localStorage.setItem('projects', newProjectList);
+}
+
+function retrieveTasksFromStorage() {
+    const taskList = localStorage.getItem('tasks');
+    const newTaskList = taskList.match(/[^,]+,[^,]+,[^,]+,[^,]+,[^,]+,[^,]+,[^,]+/gm);
+    for (let i = 0; i < newTaskList.length; i++) {
+        const newTask = JSON.parse(newTaskList[i]);
+        taskManager.setTasks(newTask);
+    }
+}
+
+function retrieveProjectsFromStorage() {
+    const projectList = localStorage.getItem('projects');
+    const newProjectList = projectList.match(/[^,]+,[^,]+,[^,]+,[^,]+/gm);
+    for (let i = 0; i < newProjectList.length; i++) {
+        const newProject = JSON.parse(newProjectList[i]);
+        taskManager.setProjects(newProject);
+    }
+}
+
+if (!localStorage.getItem('tasks')) {
+    populateStorage();
+} else {
+    retrieveTasksFromStorage();
+}
+
+if (!localStorage.getItem('projects')) {
+    populateStorage();
+} else {
+    retrieveProjectsFromStorage();
 }
 
 domManager.updateProjectList(projects, displayTaskList);
