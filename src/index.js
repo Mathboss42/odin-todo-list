@@ -165,13 +165,34 @@ function checkTask(e) {
 }
 
 function populateTaskStorage() {
-    const taskList = JSON.stringify(taskManager.getTasks());
+    let taskList = taskManager.getTasks();
+    for (let i = 0; i < taskList.length; i++) {
+        for (let property in taskList[i]) {
+            console.log(taskList[i][property]);
+            if(typeof taskList[i][property] === 'string') {
+                taskList[i][property] = escapeComma(taskList[i][property]);
+            }
+            console.log(taskList[i][property]);
+        }
+    }
+    console.log(taskList);
+    taskList = JSON.stringify(taskList);
     const newTaskList = taskList.substring(1, taskList.length-1);
     localStorage.setItem('tasks', newTaskList);
 }
 
 function populateProjectStorage() {
-    const projectList = JSON.stringify(taskManager.getProjects());
+    let projectList = taskManager.getProjects();
+    for (let i = 0; i < projectList.length; i++) {
+        for (let property in projectList[i]) {
+            console.log(projectList[i][property]);
+            if(typeof projectList[i][property] === 'string') {
+                projectList[i][property] = escapeComma(projectList[i][property]);
+            }
+            console.log(projectList[i][property]);
+        }
+    }
+    projectList = JSON.stringify(projectList);
     const newProjectList = projectList.substring(1, projectList.length-1);
     localStorage.setItem('projects', newProjectList);
 }
@@ -181,6 +202,14 @@ function retrieveTasksFromStorage() {
     const newTaskList = taskList.match(/[^,]+,[^,]+,[^,]+,[^,]+,[^,]+,[^,]+,[^,]+/gm);
     for (let i = 0; i < newTaskList.length; i++) {
         const newTask = JSON.parse(newTaskList[i]);
+        for (let property in newTask) {
+            console.log(newTask[property]);
+            if(typeof newTask[property] === 'string') {
+                newTask[property] = unEscapeComma(newTask[property]);
+            }
+            console.log(newTask[property]);
+        }
+        console.log(newTask);
         taskManager.setTasks(newTask);
     }
 }
@@ -190,8 +219,23 @@ function retrieveProjectsFromStorage() {
     const newProjectList = projectList.match(/[^,]+,[^,]+,[^,]+,[^,]+/gm);
     for (let i = 0; i < newProjectList.length; i++) {
         const newProject = JSON.parse(newProjectList[i]);
+        for (let property in newProject) {
+            console.log(newProject[property]);
+            if(typeof newProject[property] === 'string') {
+                newProject[property] = unEscapeComma(newProject[property]);
+            }
+            console.log(newProject[property]);
+        }
         taskManager.setProjects(newProject);
     }
+}
+
+function escapeComma(string) {
+    return string.replaceAll(',', '164589as1w1a6A');
+}
+
+function unEscapeComma(string) {
+    return string.replaceAll('164589as1w1a6A', ',');
 }
 
 if (!localStorage.getItem('tasks')) {
@@ -206,5 +250,6 @@ if (!localStorage.getItem('projects')) {
     retrieveProjectsFromStorage();
 }
 
+escapeComma('this, is a string with, commas,');
 domManager.updateProjectList(projects, displayTaskList);
 domManager.updateTaskList(taskManager.getTasks().filter(el => isToday(parseISO(el.dueDate)) || (el.projectID === 'dailies')).sort(comparePriority), checkTask, deleteTask);
